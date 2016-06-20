@@ -59,7 +59,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 
                     log("Loaded SwaggerUI");
 
-                    $.get("/api/client").done(function (data) {
+                    $.get("client").done(function (data) {
                         var buttonHTML = "";
                         var selectHTML = "";
 
@@ -78,7 +78,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
                         window.alert("Failed loading clients")
                     });
 
-                    $.get("/api/userList").done(function (data) {
+                    $.get("userList").done(function (data) {
                         var buttonHTML = "";
                         while(data.length){
                             var d = data.pop();
@@ -112,7 +112,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
                             password = password.replace(from[i], to[i]);
                         }
 
-                        $.post("/api/token", {
+                        $.post("token", {
                             "grant_type": "password",
                             "client_id": clientId,
                             "client_secret": clientSecret,
@@ -131,13 +131,13 @@ header("Access-Control-Allow-Headers: X-Requested-With");
                     });
                     $("#clientButtons").on('click', 'button', function () {
                         var client = this.innerHTML;
-                        $.get("/api/client/" + client, function (data) {
+                        $.get("client/" + client, function (data) {
                             if (!data.id && !data.secret) {
                                 window.alert('Could not authenticate client: ' + client);
                                 return;
                             }
 
-                            $.post("/api/token", {
+                            $.post("token", {
                                 "grant_type": "client_credentials",
                                 "client_id": data.id,
                                 "client_secret": data.secret,
@@ -161,7 +161,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 //                        return;
                         var client = this.value;
 
-                        $.get("/api/client/" + client, function (data) {
+                        $.get("client/" + client, function (data) {
                             if (!data.id && !data.secret) {
                                 window.alert('Could not get client info for: ' + client);
                                 return;

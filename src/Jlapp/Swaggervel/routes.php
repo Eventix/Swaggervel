@@ -84,6 +84,7 @@ Route::get('api-docs', function() {
 
 // THIS SHOULD NEVER EVER EVER TRIGGER IN PRODUCTION
 if (App::environment('local', 'test', 'debug')) {
+
     Route::get('client', function () {
         return (Array)\DB::table('oauth_clients')->orderBy('name', 'desc')->select('name')->distinct('name')->get();
     });
@@ -94,5 +95,9 @@ if (App::environment('local', 'test', 'debug')) {
 
     Route::get('userList', function () {
         return App\Models\Company::where('name', 'Eventix')->first()->users()->orderBy('name', 'desc')->get();
+    });
+
+    Route::get('/', function () {
+        return redirect(env('BACKEND_DEVELOPER', false) ? 'api-docs' : 'dashboard');
     });
 }
