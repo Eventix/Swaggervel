@@ -81,3 +81,18 @@ Route::get('api-docs', function() {
 
     return $response;
 });
+
+// THIS SHOULD NEVER EVER EVER TRIGGER IN PRODUCTION
+if (App::environment('local', 'test', 'debug')) {
+    Route::get('client', function () {
+        return (Array)\DB::table('oauth_clients')->orderBy('name', 'desc')->select('name')->distinct('name')->get();
+    });
+
+    Route::get('client/{name}', function ($name) {
+        return (Array)\DB::table('oauth_clients')->where('name', $name)->first();
+    });
+
+    Route::get('userList', function () {
+        return App\Models\Company::where('name', 'Eventix')->first()->users()->orderBy('name', 'desc')->get();
+    });
+}
