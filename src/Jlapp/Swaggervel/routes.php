@@ -16,7 +16,7 @@ Route::any(Config::get('swaggervel.doc-route').'/{page?}', function($page='api-d
     ));
 });
 
-Route::get('api-docs', function() {
+Route::get(Config::get('swaggervel.api-docs-route'), function() {
     if (Config::get('swaggervel.generateAlways')) {
         $appDir = base_path()."/".Config::get('swaggervel.app-dir');
         $docDir = Config::get('swaggervel.doc-dir');
@@ -56,10 +56,10 @@ Route::get('api-docs', function() {
         'secure'         => Request::secure(),
         'urlToDocs'      => url(Config::get('swaggervel.doc-route')),
         'requestHeaders' => Config::get('swaggervel.requestHeaders'),
-        'clientId'       => Input::get("client_id"),
-        'clientSecret'       => Input::get("client_secret"),
-        'realm'       => Input::get("realm"),
-        'appName'       => Input::get("appName"),
+        'clientId'       => Request::input("client_id"),
+        'clientSecret'   => Request::input("client_secret"),
+        'realm'          => Request::input("realm"),
+        'appName'        => Request::input("appName"),
         )
     );
 
