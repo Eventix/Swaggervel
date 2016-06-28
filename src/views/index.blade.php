@@ -7,7 +7,6 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 ?>
         <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <title>Eventix API Docs</title>
