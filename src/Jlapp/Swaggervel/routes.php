@@ -54,7 +54,7 @@ Route::get(Config::get('swaggervel.api-docs-route'), function() {
     //need the / at the end to avoid CORS errors on Homestead systems.
     $response = response()->view('swaggervel::index', array(
         'secure'         => Request::secure(),
-        'urlToDocs'      => url(Config::get('swaggervel.doc-route')),
+        'urlToDocs'      => Config::get('swaggervel.doc-route'),
         'requestHeaders' => Config::get('swaggervel.requestHeaders'),
         'clientId'       => Request::input("client_id"),
         'clientSecret'   => Request::input("client_secret"),
